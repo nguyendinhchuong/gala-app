@@ -1,5 +1,5 @@
 export const CLICK = 'CLICK';
-export const CHECK_CLICK_STATE = 'CHECK_CLICK_STATE';
+export const REVERSE_CLICK_STATE = 'CHECK_CLICK_STATE';
 
 export function clicking(isClick, btn_key) {
     return {
@@ -8,9 +8,8 @@ export function clicking(isClick, btn_key) {
         btn_key: btn_key
     }
 };
-export function checkAllClick(click_state) {
+export function reverseClickState() {
     return {
-        type: CHECK_CLICK_STATE,
-        click_state: click_state
+        type: REVERSE_CLICK_STATE
     }
 }

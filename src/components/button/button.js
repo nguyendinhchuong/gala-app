@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { clicking } from '../../actions';
 import '../responsive.css';
 
 
@@ -11,14 +12,12 @@ class Button extends Component {
             style: {
                 border: '2px solid #555555',
                 backgroundColor: '#cccccc'
-            },
-            isClick: false
+            }
         }
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(e) {
         //e.preventDefault();
-
         let temp = {}
         switch (+this.props.btn_key) {
 
@@ -29,8 +28,8 @@ class Button extends Component {
                 }
                 this.setState({
                     style: temp,
-                    isClick: true
                 })
+                this.props.clicking(true, +this.props.btn_key);
                 return;
             case 1:
                 temp = {
@@ -39,8 +38,8 @@ class Button extends Component {
                 }
                 this.setState({
                     style: temp,
-                    isClick: true
                 })
+                this.props.clicking(true, +this.props.btn_key);
                 break;
             case 2:
                 temp = {
@@ -49,8 +48,8 @@ class Button extends Component {
                 }
                 this.setState({
                     style: temp,
-                    isClick: true
                 })
+                this.props.clicking(true, +this.props.btn_key);
                 break;
             case 3:
                 temp = {
@@ -59,8 +58,8 @@ class Button extends Component {
                 }
                 this.setState({
                     style: temp,
-                    isClick: true
                 })
+                this.props.clicking(true, +this.props.btn_key);
                 break;
             case 4:
                 temp = {
@@ -69,8 +68,8 @@ class Button extends Component {
                 }
                 this.setState({
                     style: temp,
-                    isClick: true
                 })
+                this.props.clicking(true, +this.props.btn_key);
                 break;
             case 5:
                 temp = {
@@ -79,70 +78,36 @@ class Button extends Component {
                 }
                 this.setState({
                     style: temp,
-                    isClick: true
                 })
+                this.props.clicking(true, +this.props.btn_key);
                 break;
             default:
         }
 
     }
     render() {
-        // let btn = {}
-        // let temp = {}
-        // switch (+this.props.btn_key) {
-
-        //     case 1:
-        //         temp = {
-        //             border: '2px solid #66D48F',
-        //             backgroundColor: '#D1F2DD'
-        //         }
-        //         btn = { ...temp }
-        //         break;
-        //     case 2:
-        //         temp = {
-        //             border: '2px solid #f54b47',
-        //             backgroundColor: '#fcc2c0'
-        //         }
-        //         btn = { ...temp }
-        //         break;
-        //     case 3:
-        //         temp = {
-        //             border: '2px solid #f37735',
-        //             backgroundColor: '#fbd6c2'
-        //         }
-        //         btn = { ...temp }
-        //         break;
-        //     case 4:
-        //         temp = {
-        //             border: '2px solid #428bca',
-        //             backgroundColor: '#c6dcef'
-        //         }
-        //         btn = { ...temp }
-        //         break;
-        //     case 5:
-        //         temp = {
-        //             border: '2px solid #40e0d0',
-        //             backgroundColor: '#c5f5f0'
-        //         }
-        //         btn = { ...temp }
-        //         break;
-        //     case 6:
-        //         temp = {
-        //             border: '2px solid #ffbf00',
-        //             backgroundColor: '#ffebb2'
-        //         }
-        //         btn = { ...temp }
-        //         break;
-        //     default:
-        // }
-
+        console.log(this.props);
         return (
             <button
                 className="btn-custom"
-                style={this.state.style}
+                style={this.props.style
+                    ? this.props.style
+                    : this.state.style}
                 onClick={this.handleClick}>{this.props.name}</button>
         )
     }
 }
 
-export default Button;
+const mapStateToProps = (state) => {
+    const { isClick } = state;
+    return {
+        isClick: isClick
+    }
+}
+
+const mapDispatchToProps = {
+    clicking: clicking,
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Button);
